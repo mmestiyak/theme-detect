@@ -18,7 +18,7 @@ const scraperObject = {
           }
         : {title: document.title}
     );
-    const response = (themeInfo)
+    const response = (themeInfo?.themeName && themeInfo?.themeVersion)
       ? {
           ...themeInfo,
           urlFull: req.query.site,
@@ -28,6 +28,7 @@ const scraperObject = {
 		  img: screenshot
         }
       : {
+		  title: themeInfo.title,
           message: "Sorry, It's not a shopify store or no theme detected",
           status: 0,
 		  img: screenshot
