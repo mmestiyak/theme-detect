@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   
   try {
     browser = await browserInstance;
-    await themeScraper.scraper(browser, req.query.site, res);
+    await themeScraper.scraper(browser, req, res);
     browser.close();
   } catch (err) {
     console.log('Could not resolve the browser instance => ', err);
