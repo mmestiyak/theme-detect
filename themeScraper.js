@@ -9,19 +9,20 @@ const scraperObject = {
         return base64Encode;
       });
     let themeInfo = await page.evaluate(() =>
-      window.BOOMR.themeName && window.BOOMR.themeVersion
+      window.BOOMR?.themeName && window.BOOMR?.themeVersion
         ? {
             themeName: window.BOOMR.themeName,
             themeVersion: window.BOOMR.themeVersion,
+			title: document.title
 
           }
-        : null
+        : {title: document.title}
     );
-    const response = Object.keys(themeInfo).length
+    const response = (themeInfo)
       ? {
           ...themeInfo,
           urlFull: req.query.site,
-          fullUrl: req.query.site.replace(/^https?:\/\//, '').replace('/', ''),
+          fullUrl: req.query.site.replace(/^https?:\/\//, '').replace(/\/$/, ''),
           message: 'success',
           status: 1,
 		  img: screenshot
